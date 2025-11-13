@@ -1,5 +1,9 @@
 import { ClientProxy, ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { Logger } from '@nestjs/common';
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 const logger = new Logger('TestClient');
 
