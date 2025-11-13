@@ -24,13 +24,53 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Sales Processing Microservice built with [NestJS](https://github.com/nestjs/nest) and RabbitMQ. This microservice processes sale creation and update events through message queues.
+
+## Features
+
+- 🐰 **RabbitMQ Integration**: Message-driven architecture for reliable sale processing
+- 📦 **Event Processing**: Handles `sale.create` and `sale.update` events
+- 🔍 **Comprehensive Logging**: Detailed logging of all sale operations
+- ✅ **Message Acknowledgment**: Proper ACK/NACK handling for reliability
+- 🧪 **Fully Tested**: Unit tests with Jest
+- 🐳 **Docker Support**: Docker Compose setup for RabbitMQ
+
+## Architecture
+
+The microservice listens to a RabbitMQ queue and processes two types of messages:
+- **sale.create**: Processes new sale creation
+- **sale.update**: Processes sale updates
+
+## Prerequisites
+
+- Node.js 18+
+- Docker and Docker Compose
+- npm or yarn
 
 ## Project setup
 
 ```bash
 $ npm install
 ```
+
+## Quick Start
+
+1. **Start RabbitMQ**:
+   ```bash
+   docker-compose up -d
+   ```
+
+2. **Start the microservice**:
+   ```bash
+   npm run start:dev
+   ```
+
+3. **Run the test client** (in another terminal):
+   ```bash
+   npx ts-node test-client.ts
+   ```
+
+For detailed testing instructions, see [TESTING.md](./TESTING.md).
 
 ## Compile and run the project
 
@@ -56,6 +96,36 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+## RabbitMQ Management UI
+
+Access the RabbitMQ Management UI at http://localhost:15672
+- Username: `guest`
+- Password: `guest`
+
+## Message Format
+
+### Sale Creation
+```json
+{
+  "productId": "PROD-001",
+  "productName": "Product Name",
+  "quantity": 2,
+  "price": 99.99,
+  "customerId": "CUST-001",
+  "customerName": "Customer Name",
+  "timestamp": "2025-11-13T10:00:00Z"
+}
+```
+
+### Sale Update
+```json
+{
+  "id": 1,
+  "quantity": 5,
+  "price": 89.99
+}
 ```
 
 ## Resources
