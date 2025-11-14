@@ -20,7 +20,7 @@ export class AppController {
     return {
       status: 'ok',
       timestamp: new Date().toISOString(),
-      service: 'Sales Microservice',
+      service: 'Sales Processor Microservice',
       rabbitmq: 'connected',
     };
   }
